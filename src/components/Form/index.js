@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { Button, TextInput } from 'react-native-web';
+import { Button, TextInput, TouchableOpacity } from 'react-native';
 import ResultImc from './ResultImc';
+import styles from './style';
 
 export default function Form() {
 
@@ -20,7 +21,7 @@ export default function Form() {
             imcCalculator();
             setHeight(null);
             setWight(null);
-            setMessageImc("Seu imc é igual: " + imc);
+            setMessageImc("Seu imc é igual:");
             setTextButton("Calcular Novamente");
             return;
         }
@@ -30,29 +31,39 @@ export default function Form() {
     }
 
     return(
-        <View>
-           <View>
+        <View style={styles.formContext}>
+           <View style={styles.form}>
 
-                <Text>Altura</Text>
+                <Text style={styles.formLabel}>Altura</Text>
                 <TextInput
+                    style={styles.input}
                     onChangeText={setHeight}
                     value={height}
                     placeholder="Ex. 1.75"
-                    KeyboardType="numeric"
+                    keyboardType='numeric'
                 />
 
-                <Text>Peso</Text>
+                <Text style={styles.formLabel}>Peso</Text>
                 <TextInput
+                    style={styles.input}
                     onChangeText={setWight}
                     value={wight}
                     placeholder="Ex. 75.365"
-                    KeyboardType="numeric"
+                    keyboardType='numeric'
                 />
 
-                <Button 
-                    onPress={() => validationImc()}
-                    title={textButton}
-                />
+                <TouchableOpacity
+                    style={styles.buttonCalculator}
+                    onPress={() => {
+                        validationImc()
+                    }}
+                >
+                    <Text
+                        style={styles.textButtonCalculator}
+                    >
+                        {textButton}
+                    </Text>
+                </TouchableOpacity>
 
            </View>
 
